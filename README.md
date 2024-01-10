@@ -59,23 +59,23 @@ Then, create a state type for each of your states:
 ```cpp
 class state_dummy final : public state<blackboard_type> {
   public:
-    virtual void enter(blackboard_type& blackboard) override {
+    void enter(blackboard_type& blackboard) override {
       // ...
     }
 
-    virtual void exit(blackboard_type& blackboard) override {
+    void exit(blackboard_type& blackboard) override {
       // ...
     }
 
-    virtual void pause(blackboard_type& blackboard) override {
+    void pause(blackboard_type& blackboard) override {
       // ...
     }
 
-    virtual void resume(blackboard_type& blackboard) override {
+    void resume(blackboard_type& blackboard) override {
       // ...
     }
 
-    virtual void update(blackboard_type& blackboard) override {
+    void update(blackboard_type& blackboard) override {
       // ...
     }
 };
@@ -180,44 +180,44 @@ Next, create a class for each action that you want to be able to perform:
 ```cpp
 class collect_food final : public action<blackboard_type> {
   public:
-    virtual float score(const blackboard_type& blackboard) const override {
+    float score(const blackboard_type& blackboard) const override {
       return 50.0f;
     }
 
-    virtual void apply(blackboard_type& blackboard) const override {
+    void apply(blackboard_type& blackboard) const override {
       blackboard.food += 1;
     }
 };
 
 class collect_wood final : public action<blackboard_type> {
   public:
-    virtual float score(const blackboard_type& blackboard) const override {
+    float score(const blackboard_type& blackboard) const override {
       return 150.0f;
     }
 
-    virtual void apply(blackboard_type& blackboard) const override {
+    void apply(blackboard_type& blackboard) const override {
       blackboard.wood += 1;
     }
 };
 
 class collect_stone final : public action<blackboard_type> {
   public:
-    virtual float score(const blackboard_type& blackboard) const override {
+    float score(const blackboard_type& blackboard) const override {
       return -10.0f;
     }
 
-    virtual void apply(blackboard_type& blackboard) const override {
+    void apply(blackboard_type& blackboard) const override {
       blackboard.stone += 1;
     }
 };
 
 class collect_gold final : public action<blackboard_type> {
   public:
-    virtual float score(const blackboard_type& blackboard) const override {
+    float score(const blackboard_type& blackboard) const override {
       return 75.0f;
     }
 
-    virtual void apply(blackboard_type& blackboard) const override {
+    void apply(blackboard_type& blackboard) const override {
       blackboard.gold += 1;
     }
 };
@@ -261,30 +261,30 @@ Next, create a class for each action that you want to be able to perform:
 ```cpp
 class get_axe final : public action<blackboard_type> {
   public:
-    virtual float cost(const blackboard_type& blackboard) const override {
+    float cost(const blackboard_type& blackboard) const override {
       return 1.0f;
     }
 
-    virtual bool check_preconditions(const blackboard_type& blackboard) const override {
+    bool check_preconditions(const blackboard_type& blackboard) const override {
       return !blackboard.has_axe;
     }
 
-    virtual void apply_effects(blackboard_type& blackboard) const override {
+    void apply_effects(blackboard_type& blackboard) const override {
       blackboard.has_axe = true;
     }
 };
 
 class chop_tree final : public action<blackboard_type> {
   public:
-    virtual float cost(const blackboard_type& blackboard) const override {
+    float cost(const blackboard_type& blackboard) const override {
       return 1.0f;
     }
 
-    virtual bool check_preconditions(const blackboard_type& blackboard) const override {
+    bool check_preconditions(const blackboard_type& blackboard) const override {
       return blackboard.has_axe;
     }
 
-    virtual void apply_effects(blackboard_type& blackboard) const override {
+    void apply_effects(blackboard_type& blackboard) const override {
       blackboard.wood += 1;
     }
 };
